@@ -1,13 +1,14 @@
 #import json
 import unittest
 import urllib2
-#import time
+import datetime
 from datetime import date
 
 PROSOCCERStartYear = 2013
 PROSOCCERStartMonth = 03
-PROSOCCERStartYear = 05
+PROSOCCERStartDay = 05
 
+BACKUP_FLAG = True
 
 class prosoccer_data_dump(object):
     
@@ -27,18 +28,28 @@ class prosoccer_data_dump(object):
         response.close()
         return page_data
 
+    def daterange(self, start_date, end_date):
+        for n in range(int ((end_date - start_date).days)):
+            yield start_date + datetime.timedelta(n)
+
     def get_update_prosoccer_data_before_today (self):
         today = date.today()
+      
+        start_date = date(PROSOCCERStartYear, PROSOCCERStartMonth, PROSOCCERStartDay)
         
-        
-        Month = today.strftime("%m")
-        Day = today.strftime("%d")
-       
-        test_team_result = self.get_prosoccer_data(today.year, Month, Day)
-        print test_team_result
+        for single_date in self.daterange(start_date, today):
+            Month = single_date.strftime("%m")
+            Day = single_date.strftime("%d")
+            
+            test_team_result = self.get_prosoccer_data(single_date.year, Month, Day)
+            
+            if BACKUP_FLAG == True: 
+                file_name = '../UsefulData/{}_{}_{}.html'.format(single_date.year, Month, Day)
+                soccer_date_file = open(file_name, 'w')
+                soccer_date_file.write(test_team_result)
+                soccer_date_file.close()
+                print single_date
         return
-
-
 
     
 class Test(unittest.TestCase):
