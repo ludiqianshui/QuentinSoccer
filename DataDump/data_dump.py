@@ -1,7 +1,7 @@
 #import json
 import unittest
 import urllib2
-import time
+#import time
 from datetime import date
 
 PROSOCCERStartYear = 2013
