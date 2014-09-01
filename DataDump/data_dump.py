@@ -49,8 +49,15 @@ class prosoccer_data_dump(object):
                 soccer_date_file.write(test_team_result)
                 soccer_date_file.close()
                 print single_date
+        
         return
 
+    def get_prosoccer_data_only_today(self):
+
+        today = date.today()
+        test_team_result = self.get_prosoccer_data(today.year, today.strftime("%m"), today.strftime("%d"))
+        
+        return test_team_result
     
 class Test(unittest.TestCase):
 
@@ -61,9 +68,15 @@ class Test(unittest.TestCase):
 #         print test_team_result
 #         return 
 
-    def test_prosoccer_data(self):
+    def test_prosoccer_data_before_today(self):
         pre_predictz = prosoccer_data_dump()
         test_team_result = pre_predictz.get_update_prosoccer_data_before_today()
+  
+        print test_team_result
+        return
+    def test_prosoccer_only_today(self):
+        pre_predictz = prosoccer_data_dump()
+        test_team_result = pre_predictz.get_prosoccer_data_only_today()
  
         print test_team_result
         return
