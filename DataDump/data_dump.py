@@ -73,9 +73,9 @@ class Test(unittest.TestCase):
   
         print test_team_result
         return
-    def test_prosoccer_only_today(self):
-        pre_predictz = prosoccer_data_dump()
-        test_team_result = pre_predictz.get_prosoccer_data_only_today()
- 
-        print test_team_result
-        return
+#     def test_prosoccer_only_today(self):
+#         pre_predictz = prosoccer_data_dump()
+#         test_team_result = pre_predictz.get_prosoccer_data_only_today()
+#  
+#         print test_team_result
+#         return
