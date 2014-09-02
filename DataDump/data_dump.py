@@ -44,7 +44,7 @@ class prosoccer_data_dump(object):
             test_team_result = self.get_prosoccer_data(single_date.year, Month, Day)
             
             if BACKUP_FLAG == True: 
-                file_name = '../UsefulData/{}_{}_{}.html'.format(single_date.year, Month, Day)
+                file_name = '../UsefulData/HTMLFiles/{}_{}_{}.html'.format(single_date.year, Month, Day)
                 soccer_date_file = open(file_name, 'w')
                 soccer_date_file.write(test_team_result)
                 soccer_date_file.close()
