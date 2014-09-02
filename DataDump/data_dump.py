@@ -49,7 +49,6 @@ class prosoccer_data_dump(object):
                 soccer_date_file.write(test_team_result)
                 soccer_date_file.close()
                 print single_date
-        
         return
 
     def get_prosoccer_data_only_today(self):
