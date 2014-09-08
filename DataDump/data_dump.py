@@ -43,13 +43,24 @@ class prosoccer_data_dump(object):
             
             test_team_result = self.get_prosoccer_data(single_date.year, Month, Day)
             
+            if self.parse_prosoccer_html(test_team_result) == True:
+                print "parse data correct and saved in the DB"
+                            
             if BACKUP_FLAG == True: 
                 file_name = '../UsefulData/HTMLFiles/{}_{}_{}.html'.format(single_date.year, Month, Day)
                 soccer_date_file = open(file_name, 'w')
                 soccer_date_file.write(test_team_result)
                 soccer_date_file.close()
                 print single_date
-        return
+            
+        return test_team_result
+
+    def parse_prosoccer_html(self, prosoccer_html):
+        
+        
+        
+        return True
+        
 
     def get_prosoccer_data_only_today(self):
 
