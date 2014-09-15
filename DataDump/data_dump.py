@@ -12,16 +12,24 @@ BACKUP_FLAG = True
 
 class prosoccer_data_dump(object):
     
-    url_template= "http://www.prosoccer.gr/en/{}/{}/soccer-predictions-{}-{}-{}.html"
+    UrlTemplate= "http://www.prosoccer.gr/en/{}/{}/soccer-predictions-{}-{}-{}.html"
+    
+    OneGameInfoDic = {'GameTime': '', 'GameLeague':'', 'GameHost':'', 'GameGuest':'', 
+                'possibility_3': '', 'possibility_1':'','possibility_1':'', 'TIPS':'', 
+                'ODD_3':'', 'ODD_1':'', 'ODD_0':'', 
+                'PredictScore_1': '', 'PredictScore_2': '', 
+                'PossibilityUnder2.5': '', 'PossibilityOver2.5': '',
+                'FinalResult':'' }
+    
+    GameInfoList = []
     
     def __init__(self):
         return
 
     def get_prosoccer_data (self, year, month, date):
        
-        url = self.url_template.format(year, month, year, month, date)
+        url = self.UrlTemplate.format(year, month, year, month, date)
         print url
-#        url = "www.google.com"
         
         response = urllib2.urlopen(url);
         page_data = response.read()
@@ -57,7 +65,8 @@ class prosoccer_data_dump(object):
 
     def parse_prosoccer_html(self, prosoccer_html):
         
-        
+        self.GameInfoList 
+        self.GameInfo
         
         return True
         
@@ -81,7 +90,7 @@ class Test(unittest.TestCase):
     def test_prosoccer_data_before_today(self):
         pre_predictz = prosoccer_data_dump()
         test_team_result = pre_predictz.get_update_prosoccer_data_before_today()
-  
+        
         print test_team_result
         return
 #     def test_prosoccer_only_today(self):
