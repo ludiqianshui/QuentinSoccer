@@ -4,11 +4,16 @@ import urllib2
 import datetime
 from datetime import date
 
+from bs4 import BeautifulSoup
+
+import xml.etree.ElementTree as ET
+
 PROSOCCERStartYear = 2013
 PROSOCCERStartMonth = 03
 PROSOCCERStartDay = 05
 
-BACKUP_FLAG = True
+# BACKUP_FLAG = True
+BACKUP_FLAG = False
 
 class prosoccer_data_dump(object):
     
@@ -65,18 +70,38 @@ class prosoccer_data_dump(object):
 
     def parse_prosoccer_html(self, prosoccer_html):
         
-        self.GameInfoList 
-        self.GameInfo
+        RetValue = False
+        soup=BeautifulSoup(prosoccer_html)
+        TableContent = soup.find("table", {"id": "anyid"} )
+        if TableContent.__str__() == "":
+            return RetValue
         
-        return True
+        root = ET.fromstring(TableContent.__str__())
+        for child in root:
+        
+        
+            print child.tag
+            
+        RetValue = True
+            
+#         self.GameInfoList 
+#         self.GameInfo
+#         
+        return RetValue
         
 
     def get_prosoccer_data_only_today(self):
 
         today = date.today()
-        test_team_result = self.get_prosoccer_data(today.year, today.strftime("%m"), today.strftime("%d"))
+        TodayInfo = self.get_prosoccer_data(today.year, today.strftime("%m"), today.strftime("%d"))
+        RetValue = False
         
-        return test_team_result
+        if self.parse_prosoccer_html(TodayInfo) == True:
+            print "parse data correct and saved in the DB"
+            
+            RetValue = True
+
+        return RetValue
     
 class Test(unittest.TestCase):
 
@@ -87,15 +112,23 @@ class Test(unittest.TestCase):
 #         print test_team_result
 #         return 
 
-    def test_prosoccer_data_before_today(self):
-        pre_predictz = prosoccer_data_dump()
-        test_team_result = pre_predictz.get_update_prosoccer_data_before_today()
-        
-        print test_team_result
-        return
-#     def test_prosoccer_only_today(self):
+#     def test_parse_prosoccer_html(self):
 #         pre_predictz = prosoccer_data_dump()
-#         test_team_result = pre_predictz.get_prosoccer_data_only_today()
-#  
+#         test_team_result = pre_predictz.get_update_prosoccer_data_before_today()
+#         
 #         print test_team_result
 #         return
+    
+#     def test_prosoccer_data_before_today(self):
+#         pre_predictz = prosoccer_data_dump()
+#         test_team_result = pre_predictz.get_update_prosoccer_data_before_today()
+#         
+#         print test_team_result
+#         return
+    
+    def test_prosoccer_only_today(self):
+        pre_predictz = prosoccer_data_dump()
+        RetValue = pre_predictz.get_prosoccer_data_only_today()
+  
+        print RetValue
+        return
