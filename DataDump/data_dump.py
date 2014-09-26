@@ -75,8 +75,9 @@ class prosoccer_data_dump(object):
         TableContent = soup.find("table", {"id": "anyid"} )
         if TableContent.__str__() == "":
             return RetValue
-        
         root = ET.fromstring(TableContent.__str__())
+        print root[0][0].text
+        
         for child in root:
         
         
