@@ -68,11 +68,13 @@ class prosoccer_data_dump(object):
             
         return test_team_result
 
-    def parse_prosoccer_html(self, prosoccer_html):
+    def parse_prosoccer_html(self, prosoccer_html_str):
         
         RetValue = False
-        soup=BeautifulSoup(prosoccer_html)
-        TableContent = soup.find("table", {"id": "anyid"} )
+        soup=BeautifulSoup(prosoccer_html_str)
+
+# get the table content by the given tag of anyid for the talble id
+        TableContent = soup.find("table", {"id": "anyid"} ) 
         if TableContent.__str__() == "":
             return RetValue
         root = ET.fromstring(TableContent.__str__())
@@ -84,7 +86,7 @@ class prosoccer_data_dump(object):
             print child.tag
             
         RetValue = True
-            
+        
 #         self.GameInfoList 
 #         self.GameInfo
 #         
@@ -113,12 +115,12 @@ class Test(unittest.TestCase):
 #         print test_team_result
 #         return 
 
-#     def test_parse_prosoccer_html(self):
-#         pre_predictz = prosoccer_data_dump()
-#         test_team_result = pre_predictz.get_update_prosoccer_data_before_today()
-#         
-#         print test_team_result
-#         return
+    def test_parse_prosoccer_html(self):
+        pre_predictz = prosoccer_data_dump()
+        test_team_result = pre_predictz.get_update_prosoccer_data_before_today()
+         
+        print test_team_result
+        return
     
 #     def test_prosoccer_data_before_today(self):
 #         pre_predictz = prosoccer_data_dump()
@@ -127,9 +129,9 @@ class Test(unittest.TestCase):
 #         print test_team_result
 #         return
     
-    def test_prosoccer_only_today(self):
-        pre_predictz = prosoccer_data_dump()
-        RetValue = pre_predictz.get_prosoccer_data_only_today()
-  
-        print RetValue
-        return
+#     def test_prosoccer_only_today(self):
+#         pre_predictz = prosoccer_data_dump()
+#         RetValue = pre_predictz.get_prosoccer_data_only_today()
+#   
+#         print RetValue
+#         return
