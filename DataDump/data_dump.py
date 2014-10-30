@@ -20,13 +20,15 @@ class prosoccer_data_dump(object):
     UrlTemplate= "http://www.prosoccer.gr/en/{}/{}/soccer-predictions-{}-{}-{}.html"
     
     GameInfoDic = {'GameTime': '', 'GameLeague':'', 'GameHost':'', 'GameGuest':'', 
-                'possibility_3': '', 'possibility_1':'','possibility_1':'', 'TIPS':'', 
+                'PredictPossibility_3': '', 'PredictPossibility_1':'','PredictPossibility_0':'', 'TIPS':'', 
                 'ODD_3':'', 'ODD_1':'', 'ODD_0':'', 
                 'PredictScore_1': '', 'PredictScore_2': '', 
-                'PossibilityUnder2.5': '', 'PossibilityOver2.5': '',
+                'PredictPossibilityUnder2.5': '', 'PredictPossibilityOver2.5': '',
                 'FinalResult':'' }
     
     GameInfoList = []
+    
+    FlagGameFinished = True 
     
     def __init__(self):
         return
@@ -70,14 +72,13 @@ class prosoccer_data_dump(object):
 
     def parse_prosoccer_html(self, prosoccer_html_str):
         
-        RetValue = False
         soup=BeautifulSoup(prosoccer_html_str)
-
+        
 # get the table content by the given tag of anyid for the talble id
         TableContent = soup.find("table", {"id": "anyid"} ) 
         if TableContent.__str__() == "":
-            return RetValue
-        
+            return False
+        print TableContent
         tabel_root = ET.fromstring(TableContent.__str__())
         
 # get content of tr(each tr is a each game info) and td (each td is a item of the game info)
@@ -93,16 +94,55 @@ class prosoccer_data_dump(object):
                 self.GameInfoDic['GameHost'] = str(td_tag_list[2].getchildren()[0].text).split('-')[0].replace(' ','')
                 # get GameGuest
                 self.GameInfoDic['GameGuest'] = str(td_tag_list[2].getchildren()[0].text).split('-')[1].replace(' ','')
+
+                
+                # get finished game score 
+                if td_tag_list[14].text == ' - ':
+                    self.GameInfoDic['FinalResult'] = ''
+                    self.FlagGameFinished = False
+                else: 
+                    self.GameInfoDic['FinalResult'] = td_tag_list[14].text
+                    self.FlagGameFinished = True
+               
+                # if the game finished      
+                if self.FlagGameFinished == True:
+                    # get predict possibility win
+                    self.GameInfoDic['PredictPossibility_3'] = td_tag_list[3].text
+                    # get predict possibility draw
+                    self.GameInfoDic['PredictPossibility_1'] = td_tag_list[4].text
+                    # get predict possibility lose
+                    self.GameInfoDic['PredictPossibility_0'] = td_tag_list[5].text
+                    #get tips
+                    self.GameInfoDic['TIPS'] = 
+                    
+                    
+                # if the game not finished
+                if self.FlagGameFinished == False:
+                    # get predict possibility win
+                    number_1st_digit = td_tag_list[3].getchildren()[0].attrib['class'].split('_')[-1]
+                    number_2st_digit = td_tag_list[3].getchildren()[1].attrib['class'].split('_')[-1]
+                    self.GameInfoDic['PredictPossibility_3'] = int(number_1st_digit + number_2st_digit)
+                    # get predict possibility draw
+                    number_1st_digit = td_tag_list[4].getchildren()[0].attrib['class'].split('_')[-1]
+                    number_2st_digit = td_tag_list[4].getchildren()[1].attrib['class'].split('_')[-1]
+                    self.GameInfoDic['PredictPossibility_1'] = int(number_1st_digit + number_2st_digit)
+                    # get predict possibility lose
+                    number_1st_digit = td_tag_list[5].getchildren()[0].attrib['class'].split('_')[-1]
+                    number_2st_digit = td_tag_list[5].getchildren()[1].attrib['class'].split('_')[-1]
+                    self.GameInfoDic['PredictPossibility_0'] = int(number_1st_digit + number_2st_digit)
+                    #get tips
+                    self.GameInfoDic['TIPS'] = td_tag_list[5].text
+                
+                
                 
                 
                 print self.GameInfoDic
              
-        RetValue = True
            
 #         self.GameInfoList 
 #         self.GameInfo
 #         
-        return RetValue
+        return True
         
 
     def get_prosoccer_data_only_today(self):
