@@ -136,24 +136,21 @@ class prosoccer_data_dump(object):
                     # get predict score             
                     if td_tag_list[10].getchildren() == None:
                         self.GameInfoDic['PredictScore_1'] = td_tag_list[10].text
-                    
-                    if len(td_tag_list[10].getchildren()) == 1 and td_tag_list[10].text[0]  == "-":
-                        self.GameInfoDic['PredictScore_1'] = td_tag_list[10].getchildren()[0].text + td_tag_list[10].text
-                    elif len(td_tag_list[10].getchildren()) == 1 and td_tag_list[10].text[-1]  == "-":
+                    if len(td_tag_list[10].getchildren()) == 1 and td_tag_list[10].text  == None:
+                        self.GameInfoDic['PredictScore_1'] = td_tag_list[10].getchildren()[0].text + td_tag_list[10].getchildren()[0].tail
+                    elif len(td_tag_list[10].getchildren()) == 1 and td_tag_list[10].text  != None:
                         self.GameInfoDic['PredictScore_1'] = td_tag_list[10].text + td_tag_list[10].getchildren()[0].text 
-                    
                     if len(td_tag_list[10].getchildren()) == 2:
                         self.GameInfoDic['PredictScore_1'] = td_tag_list[10].getchildren()[0].text +"-" + td_tag_list[10].getchildren()[1].text
-                                        
-#                     self.GameInfoDic['PredictScore_1'] = td_tag_list[10].text + td_tag_list[10].getchildren()[0].text
-
                     
-                    
-                    
-                    
-                    
-                    
-                    self.GameInfoDic['PredictScore_2'] = td_tag_list[11].text + td_tag_list[11].getchildren()[0].text
+                    if td_tag_list[11].getchildren() == None:
+                        self.GameInfoDic['PredictScore_2'] = td_tag_list[11].text
+                    if len(td_tag_list[11].getchildren()) == 1 and td_tag_list[11].text  == None:
+                        self.GameInfoDic['PredictScore_2'] = td_tag_list[11].getchildren()[0].text + td_tag_list[11].getchildren()[0].tail
+                    elif len(td_tag_list[11].getchildren()) == 1 and td_tag_list[11].text  != None:
+                        self.GameInfoDic['PredictScore_2'] = td_tag_list[11].text + td_tag_list[11].getchildren()[0].text 
+                    if len(td_tag_list[11].getchildren()) == 2:
+                        self.GameInfoDic['PredictScore_2'] = td_tag_list[11].getchildren()[0].text +"-" + td_tag_list[11].getchildren()[1].text
 
                 # if the game not finished
                 if self.FlagGameFinished == False:
