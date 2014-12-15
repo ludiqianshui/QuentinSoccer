@@ -111,6 +111,8 @@ class prosoccer_data_dump(object):
                     self.GameInfoDic['PredictTIPS'] = str(tips_value[1:]).upper()
                 elif tips_value[0] == "r":  #haibukeyi
                     self.GameInfoDic['PredictTIPS'] = str(tips_value[1:]).upper()
+                    if len (self.GameInfoDic['PredictTIPS']) == 3:
+                        self.GameInfoDic['PredictTIPS'] = self.GameInfoDic['PredictTIPS'][0:1]
                 elif tips_value[0] == "w":
                     self.GameInfoDic['PredictTIPS'] = str(tips_value[1:]).upper()
                 else :
@@ -201,10 +203,10 @@ class Test(unittest.TestCase):
          
 #         print test_team_result
         return test_team_result
-# 
-#     def test_prosoccer_only_today(self):
-#         pre_predictz = prosoccer_data_dump()
-#         RetValue = pre_predictz.get_prosoccer_data_only_today()
-#     
-#         print RetValue
-#         return
+ 
+    def test_prosoccer_only_today(self):
+        pre_predictz = prosoccer_data_dump()
+        RetValue = pre_predictz.get_prosoccer_data_only_today()
+     
+        print RetValue
+        return
