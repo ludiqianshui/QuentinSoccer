@@ -35,10 +35,12 @@ class InPlayGame (object):
         soccer_date_file.close()
         
 #        parse the html data to get game list in the page, important tag is tr with class name "rowOdd"
+        print page_data
         soup=BeautifulSoup(page_data)
 # get the table content by the given tag of anyid for the talble id
         GameContent = soup.find_all('tr', {"class": "rowOdd" }) 
 #         GameContent1 = soup.find(id="rowOdd")
+        print len(GameContent)
         print len(GameContent)
 
         return page_data
