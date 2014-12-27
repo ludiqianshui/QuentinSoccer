@@ -37,14 +37,14 @@ class InPlayGameBySelenium (object):
         self.browser.find_element_by_id("changeOrder").send_keys("Time")
         
         time.sleep(10)
-        page_data = self.browser.page_source
+        page_data = self.browser.page_source.encode('ASCII', 'ignore')
         """       
             save the info in a html file, this part can be removed.
         """
-#         file_name = 'GameToday.html'
-#         soccer_date_file = open(file_name, 'w')
-#         soccer_date_file.write(page_data)
-#         soccer_date_file.close()
+        file_name = 'GameToday.html'
+        soccer_date_file = open(file_name, 'w')
+        soccer_date_file.write(page_data)
+        soccer_date_file.close()
         
         return 
     
