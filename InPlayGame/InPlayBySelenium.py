@@ -8,6 +8,7 @@ cookiesss = browser.get_cookies()
 import time
 import unittest
 
+from bs4 import BeautifulSoup
 from selenium import webdriver
 
 
@@ -46,6 +47,12 @@ class InPlayGameBySelenium (object):
         soccer_date_file.write(page_data)
         soccer_date_file.close()
         
+        soup=BeautifulSoup(page_data)
+# get the table content by the given tag of anyid for the talble id
+        GameContent = soup.find_all('tr', {"class": "rowOdd" }) 
+#         GameContent1 = soup.find(id="rowOdd")
+        print len(GameContent)
+
         return 
     
     
