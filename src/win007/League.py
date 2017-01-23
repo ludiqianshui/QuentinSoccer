@@ -17,4 +17,8 @@ class League(object):
     def __del__(self):
         return
 
-    def get_league_
+    def get_win007_league_page (self):
+
+
+
+        return
