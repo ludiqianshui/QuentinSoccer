@@ -35,10 +35,14 @@
                 "league_name": "premier_eng"
             }
         ],
-        "js_file": "http://zq.win007.com/Script/cn/league.js",
+        "js_file": "http://zq.win007.com/jsData/matchResult/2016-2017/s36.js",
         "js_function": "http://zq.win007.com/Script/cn/league.js"
     },
     "season_info": {
         "js_file": "http://zq.win007.com/jsData/LeagueSeason/sea8.js"
+    },
+    "team_info": {
+        "js_file": "http://zq.win007.com/jsData/teamInfo/team8.js",
+        "js_team_detail": "http://zq.win007.com/jsData/teamInfo/teamDetail/tdl88.js"
     }
 }
