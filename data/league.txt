@@ -2,16 +2,16 @@ jh[
     "R_1"   #round 1
 ]=[
     [
-        1258051, #game_id  
-        8,	#league_id
-        -1,  #play_flag
-        '2016-08-2702: 30',		#game_time          	
-        88,		#home_team
-        132,	#away_team
-        '6-0',	#final_score
-        '2-0',	#half_score
+        1258051,                #game_id    Y
+        8,	                    #league_id  Y
+        -1,                     #play_flag  Y
+        '2016-08-2702: 30',		#game_time  Y
+        88,		                #home_team  Y
+        132,	                #away_team  Y
+        '6-0',	                #final_score Y
+        '2-0',	                #half_score Y
         '1',	#home_rank
-        '13',	#away_rank
+        '13',	#away_rank   
         2.25,	#final_handicap
         1,		#half_handicap
         '3.5',	#final_overunder
