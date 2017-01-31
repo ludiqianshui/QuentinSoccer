@@ -11,7 +11,7 @@ jh[
         '6-0',	                #final_score Y
         '2-0',	                #half_score Y
         '1',	#home_rank
-        '13',	#away_rank   
+        '13',	#away_rank
         2.25,	#final_handicap
         1,		#half_handicap
         '3.5',	#final_overunder
