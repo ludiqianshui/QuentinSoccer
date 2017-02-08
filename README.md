@@ -1,9 +1,6 @@
 QuentinSoccer
 =============
 
-This a soccer prediction app with the betting recommendation
- 
-This the server part written in python, providing RESTFUL API for the client
+This is a soccer service prediction with the betting recommendation.
 
-And another part of client is under development
-
+The server part written in python + Node.js, providing RESTFUL API for the client,DB is Mongo.
