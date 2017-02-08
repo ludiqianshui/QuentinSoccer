@@ -28,11 +28,6 @@ class League(object):
         league_driver.get(league_url)
         league_elem = league_driver.find_element_by_class_name("tdsolid")
         tr1 = league_elem.find_element_by_xpath('tr[1]')
-        print  tr1
-        # league_content = urllib2.urlopen(league_url).read()
-        # soup = BeautifulSoup(league_content)
-        # table = soup.find_all("tr")
-        # print table[0]
         return
 
     def get_goldenbet(self):
