@@ -24,14 +24,29 @@
 	},
 	"league_info": {
 		"league_info": [{
-			"league_id": "8",
-			"league_link": "http://zq.win007.com/cn/League/8.html",
-			"league_name": "bundesliga_de"
-		}, {
-			"league_id": "36",
-			"league_link": "http://zq.win007.com/cn/League/36.html",
-			"league_name": "premier_eng"
-		}],
+				"league_id": "8",
+				"league_link": "http://zq.win007.com/cn/League/8.html",
+				"league_name": "bundesliga_de"
+			}, {
+				"league_id": "36",
+				"league_link": "http://zq.win007.com/cn/League/36.html",
+				"league_name": "premier_eng"
+			}, {
+				"league_id": "34",
+				"league_link": "http://zq.win007.com/cn/League/34.html",
+				"league_name": "Italian_A"
+			}, {
+				"league_id": "31",
+				"league_link": "http://zq.win007.com/cn/League/31.html",
+				"league_name": "Spain_A"
+			}, {
+				"league_id": "11",
+				"league_link": "http://zq.win007.com/cn/League/11.html",
+				"league_name": "French_A"
+			}
+
+
+		],
 		"js_file": "http://zq.win007.com/jsData/matchResult/2016-2017/s8.js",
 		"js_function": "http://zq.win007.com/Script/cn/league.js"
 	},

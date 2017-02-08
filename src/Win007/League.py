@@ -10,7 +10,7 @@ from selenium import webdriver
 
 class League(object):
     """
-        This module provides Team related function
+        This module provides League related function
     """
     win007_league_base_url = "http://zq.win007.com/cn/League/{}{}.html"
 
@@ -20,7 +20,7 @@ class League(object):
     def __del__(self):
         return
 
-    def get_win007_league_page (self,  league_id , season_id = ""):
+    def get_win007_league_page(self,  league_id , season_id = ""):
 
         league_url = self.win007_league_base_url.format(season_id, league_id)
 

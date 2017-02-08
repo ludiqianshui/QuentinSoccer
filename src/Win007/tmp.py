@@ -20,7 +20,7 @@ class League(object):
     def __del__(self):
         return
 
-    def get_win007_league_page (self,  league_id , season_id = ""):
+    def get_win007_league_page(self, league_id, season_id=""):
 
         league_url = self.win007_league_base_url.format(season_id, league_id)
 
@@ -34,8 +34,10 @@ class League(object):
         url = "http://www.goldenbet.com/en/"
         league_driver = webdriver.Chrome()
         league_driver.get(url)
-        league_elem = league_driver.find_element_by_xpath('//*[@id="tipster_top_div"]/div[5]/div/table/tbody')
-        print  league_elem
+        league_elem = league_driver.find_element_by_xpath(
+            '//*[@id="tipster_top_div"]/div[5]/div/table/tbody'
+        )
+        print league_elem
         return
 
 
