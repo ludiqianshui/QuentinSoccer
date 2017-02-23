@@ -4,7 +4,6 @@
 
 import unittest
 import requests
-import os
 
 class DataDownload(object):
     """

@@ -3,8 +3,6 @@
 """
 
 import unittest
-import urllib2
-from bs4 import BeautifulSoup
 
 from selenium import webdriver
 
