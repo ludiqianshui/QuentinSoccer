@@ -2,7 +2,7 @@
     This module provides Team related function
 """
 
-import os
+import 
 
 class Team(object):
     """
