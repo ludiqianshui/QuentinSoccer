@@ -38,7 +38,18 @@ class Game(object):
             odd_table_body = soup.find_all("span", id="odds2")
             odd_item_list  = odd_table_body[0].find_all("tr")
             print len(odd_item_list)
-            
+            for odd_item in odd_item_list:
+                print len(odd_item.find_all("td"))
+                if len(odd_item.find_all("td")) < 7:
+                    continue
+                odd_item_game_time = odd_item.find_all("td")[0].text #game time
+                odd_item_current_score = odd_item.find_all("td")[1].text #score
+                odd_item_up_rate = odd_item.find_all("td")[2].text #shangpan shuiwei
+                odd_item_type = odd_item.find_all("td")[3].text # odd type
+                odd_item_down_rate = odd_item.find_all("td")[4].text #xiapanshuiwei
+                odd_item_time = odd_item.find_all("td")[5].text #time
+                odd_item_state = odd_item.find_all("td")[6].text
+                print odd_item_game_time, odd_item_current_score, odd_item_up_rate, odd_item_type, odd_item_down_rate, odd_item_time, odd_item_state
         return
     
 class Test(unittest.TestCase):
