@@ -24,11 +24,20 @@ class GameInfo(object):
         
     def get_game_info_by_id (self, game_id):
         game_info_url = self.game_base_url.format(game_id)
-        url_data = urllib2.urlopen(game_info_url)
+        print game_info_url
+        opener = urllib2.build_opener()
+        headers = {  'User-Agent': 'Mozilla/5.0 (Windows NT 5.1; rv:10.0.1) Gecko/20100101 Firefox/10.0.1',}
+        opener.addheaders = headers.items()
+        url_data = opener.open(game_info_url,timeout=10).read()
         soup = BeautifulSoup(url_data)
         odd_table_body = soup.find_all("script")
         print odd_table_body    
-        
+        for script_in_body in odd_table_body:
+            if script_in_body.text.find("function show_info") != -1 :
+                print script_in_body
+                game_file = open("../../../data/game/game_info"+str(game_id)+".js", 'w+')
+                game_file.write(script_in_body.text.encode('ascii', 'ignore').decode('ascii'))
+                game_file.close()
         return
     
 
