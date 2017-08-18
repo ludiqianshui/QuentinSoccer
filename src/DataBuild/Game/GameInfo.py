@@ -6,6 +6,8 @@ Created on 3 Aug 2017
 import unittest
 import urllib2
 from bs4 import BeautifulSoup
+from selenium import webdriver
+import re
 
 class GameInfo(object):
     '''
@@ -40,7 +42,26 @@ class GameInfo(object):
                 game_file.close()
         return
     
-
+    def get_game_id_per_day(self):
+        driver = webdriver.Chrome()
+        driver.get("http://www.nowgoal.cc/")
+        elem = driver.find_element_by_id('mintable').get_attribute('outerHTML')
+        day_file = open("../../../data/game/day_table_info.html", 'w+')
+        day_file.write (elem.encode('ascii', 'ignore').decode('ascii'))
+        day_file.close()
+        today_game_list = self._get_game_id_from_day_table()
+        print today_game_list
+        
+    def _get_game_id_from_day_table(self, day_table_file = "../../../data/game/day_table_info.html"):
+        today_game_list = []
+        soup = BeautifulSoup(open(day_table_file),'html.parser')
+        onclick = soup.findAll('td', onclick=True)
+        for elm in onclick:
+            match = re.search(r"showgoallist\(([0-9]+)\)", str(elm))
+            print match.group(1)
+            today_game_list.append(match.group(1))
+        return today_game_list
+     
 class Test(unittest.TestCase):
 
     def setUp(self):
@@ -51,7 +72,13 @@ class Test(unittest.TestCase):
         return
 
     def test_get_game_info(self):
-        self.test_obj.get_game_info_by_id(1365286)
+        pass
+#         self.test_obj.get_game_info_by_id(1365286)
+        # self.test_obj.get_goldenbet()
+        return
+
+    def test_get_game_id_per_day(self):
+        self.test_obj.get_game_id_per_day()
         # self.test_obj.get_goldenbet()
         return
 
