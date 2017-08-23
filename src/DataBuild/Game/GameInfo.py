@@ -51,6 +51,7 @@ class GameInfo(object):
         day_file.close()
         today_game_list = self._get_game_id_from_day_table()
         print today_game_list
+        print len(today_game_list)
         
     def _get_game_id_from_day_table(self, day_table_file = "../../../data/game/day_table_info.html"):
         today_game_list = []
