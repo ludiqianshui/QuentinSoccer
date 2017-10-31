@@ -8,6 +8,8 @@ import urllib2
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import re
+import datetime
+import json
 
 class GameInfo(object):
     '''
@@ -42,7 +44,7 @@ class GameInfo(object):
                 game_file.close()
         return
     
-    def get_game_id_per_day(self):
+    def get_daily_game_id(self):
         driver = webdriver.Chrome()
         driver.get("http://www.nowgoal.cc/")
         elem = driver.find_element_by_id('mintable').get_attribute('outerHTML')
@@ -50,8 +52,21 @@ class GameInfo(object):
         day_file.write (elem.encode('ascii', 'ignore').decode('ascii'))
         day_file.close()
         today_game_list = self._get_game_id_from_day_table()
-        print today_game_list
-        print len(today_game_list)
+#        print today_game_list
+        self.write_daily_game_info(today_game_list)
+        return
+        
+    def write_daily_game_info(self, game_list):    
+        time_now = datetime.datetime.now()
+        time_now = time_now.strftime('%Y-%m-%d')
+        
+        with open("../../../data/game/daily_game_info.json", 'r') as data_file:    
+            data = json.load(data_file)
+        print data
+        data[time_now] = game_list
+        
+        with open("../../../data/game/daily_game_info.json", 'w') as data_file:
+            data_file.write(json.dumps(data))
         
     def _get_game_id_from_day_table(self, day_table_file = "../../../data/game/day_table_info.html"):
         today_game_list = []
@@ -59,7 +74,6 @@ class GameInfo(object):
         onclick = soup.findAll('td', onclick=True)
         for elm in onclick:
             match = re.search(r"showgoallist\(([0-9]+)\)", str(elm))
-            print match.group(1)
             today_game_list.append(match.group(1))
         return today_game_list
      
@@ -79,7 +93,7 @@ class Test(unittest.TestCase):
         return
 
     def test_get_game_id_per_day(self):
-        self.test_obj.get_game_id_per_day()
+        self.test_obj.get_daily_game_id()
         # self.test_obj.get_goldenbet()
         return
 
