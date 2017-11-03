@@ -63,7 +63,6 @@ class GameInfo(object):
         with open("../../../data/game/daily_game_info.json", 'r') as data_file:    
             data = json.load(data_file)
         print data
-        data["2017-10-30"] = game_list
         data.update({time_now:game_list})
         
         with open("../../../data/game/daily_game_info.json", 'w') as data_file:
