@@ -2,18 +2,10 @@
     This module provides script runner
 """
 # !/usr/bin/env python
-import threading
-import time
+import argparse
 
-class Runner(threading.Thread):
+parser = argparse.ArgumentParser()
+parser.add_argument("echo", help="echo the string you use here")
+args = parser.parse_args()
+print args.echo
 
-    def run(name):
-        print("{} started!".format(name))
-        # search game schedule
-        print("{} finished!".format(name))
-
-    if __name__ == '__main__':
-        vl = 1
-        while (vl != 0):
-            mythread = run("bet search")
-            time.sleep(2)

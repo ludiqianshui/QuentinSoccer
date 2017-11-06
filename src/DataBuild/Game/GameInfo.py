@@ -45,6 +45,7 @@ class GameInfo(object):
         return
     
     def get_daily_game_id(self):
+        print "entrance"
         driver = webdriver.Chrome()
         driver.get("http://www.nowgoal.cc/")
         elem = driver.find_element_by_id('mintable').get_attribute('outerHTML')
