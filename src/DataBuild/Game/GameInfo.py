@@ -39,7 +39,7 @@ class GameInfo(object):
         for script_in_body in odd_table_body:
             if script_in_body.text.find("function show_info") != -1 :
                 print script_in_body
-                game_file = open("../../../data/game/game_info"+str(game_id)+".js", 'w+')
+                game_file = open("../../data/game/game_info"+str(game_id)+".js", 'w+')
                 game_file.write(script_in_body.text.encode('ascii', 'ignore').decode('ascii'))
                 game_file.close()
         return
@@ -49,7 +49,7 @@ class GameInfo(object):
         driver = webdriver.Chrome()
         driver.get("http://www.nowgoal.cc/")
         elem = driver.find_element_by_id('mintable').get_attribute('outerHTML')
-        day_file = open("../../../data/game/day_table_info.html", 'w+')
+        day_file = open("../../data/game/day_table_info.html", 'w+')
         day_file.write (elem.encode('ascii', 'ignore').decode('ascii'))
         day_file.close()
         today_game_list = self._get_game_id_from_day_table()
@@ -61,15 +61,15 @@ class GameInfo(object):
         time_now = datetime.datetime.now()
         time_now = time_now.strftime('%Y-%m-%d')
         
-        with open("../../../data/game/daily_game_info.json", 'r') as data_file:    
+        with open("../../data/game/daily_game_info.json", 'r') as data_file:    
             data = json.load(data_file)
         print data
         data.update({time_now:game_list})
         
-        with open("../../../data/game/daily_game_info.json", 'w') as data_file:
+        with open("../../data/game/daily_game_info.json", 'w') as data_file:
             data_file.write(json.dumps(data))
         
-    def _get_game_id_from_day_table(self, day_table_file = "../../../data/game/day_table_info.html"):
+    def _get_game_id_from_day_table(self, day_table_file = "../../data/game/day_table_info.html"):
         today_game_list = []
         soup = BeautifulSoup(open(day_table_file),'html.parser')
         onclick = soup.findAll('td', onclick=True)

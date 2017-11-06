@@ -5,18 +5,16 @@ Created on Nov 6, 2017
 '''
 # !/usr/bin/env python
 import sys
+sys.path.append('/home/song/QProject/QuentinSoccer')
 print sys.path
 
 import argparse
-import src.DataBuild.Game.GameInfo.GameInfo
+from src.DataBuild.Game import GameInfo
 
 parser = argparse.ArgumentParser()
 parser.add_argument("time_1", help="set the time to get list the of the daily games")
-parser.add_argument("para_2", help="para_2")
 
 args = parser.parse_args()
-print args.time_1
-
-src.DataBuild.Game.GameInfo.GameInfo.get_daily_game_id()
-print args.para_2
+gi = GameInfo.GameInfo()
+gi.get_daily_game_id()
 
