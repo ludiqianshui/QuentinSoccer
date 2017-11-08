@@ -6,7 +6,7 @@ Created on Nov 6, 2017
 # !/usr/bin/env python
 import sys
 sys.path.append('/home/song/QProject/QuentinSoccer')
-print sys.path
+#print sys.path
 
 import argparse
 from src.DataBuild.Game import GameInfo
