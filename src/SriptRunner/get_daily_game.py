@@ -12,7 +12,7 @@ import argparse
 from src.DataBuild.Game import GameInfo
 
 parser = argparse.ArgumentParser()
-parser.add_argument("time_1", help="set the time to get list the of the daily games")
+parser.add_argument("time", help="set the time to get list the of the daily games")
 
 args = parser.parse_args()
 gi = GameInfo.GameInfo()
