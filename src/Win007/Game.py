@@ -6,6 +6,8 @@ import urllib2
 from bs4 import BeautifulSoup
 import datetime
 import json
+from bs4 import UnicodeDammit
+
 
 class Game(object):
 
@@ -31,6 +33,11 @@ class Game(object):
                 odd_item_type =   odd_item.find_all("td")[1].next  #odd type
                 odd_item_up_rate =  odd_item.find_all("td")[2].text    #shangpan shuiwei  
                 odd_item_down_rate =   odd_item.attrs['title'].split(':')[1]    #xiapan shuiwei
+ 
+                print ("odd_item_time  {}   ".format(odd_item_time))  
+                print ("odd_item_type  {}   ".format(odd_item_type.string.encode('utf-8')))
+                print ("odd_item_up_rate  {}".format(odd_item_up_rate.encode('utf-8')))
+                print ("odd_item_down_rate  {}".format(odd_item_down_rate.encode('utf-8')))
      
     def get_game_odd_by_oddchange(self, odd_type, game_id, company_id):
         game_odd_url = self.game_odd_base_url.format(odd_type, game_id, company_id)
@@ -54,6 +61,13 @@ class Game(object):
                 odd_item_time = odd_item.find_all("td")[5].text #time
                 odd_item_state = odd_item.find_all("td")[6].text
                 # print odd_item_game_time, odd_item_current_score, odd_item_up_rate, odd_item_type, odd_item_down_rate, odd_item_time, odd_item_state
+        return
+
+    def get_yesterday_game_odd(self):
+        time_yesterday = datetime.datetime.today()- datetime.timedelta(1)
+        time_yesterday = time_yesterday.strftime('%Y-%m-%d')
+        self._get_game_odd_per_date(time_yesterday)
+        print time_yesterday
         return
 
     def get_daily_game_odd(self):
