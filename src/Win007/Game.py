@@ -33,12 +33,7 @@ class Game(object):
                 odd_item_type =   odd_item.find_all("td")[1].next  #odd type
                 odd_item_up_rate =  odd_item.find_all("td")[2].text    #shangpan shuiwei  
                 odd_item_down_rate =   odd_item.attrs['title'].split(':')[1]    #xiapan shuiwei
- 
-                print ("odd_item_time  {}   ".format(odd_item_time))  
-                print ("odd_item_type  {}   ".format(odd_item_type.string.encode('utf-8')))
-                print ("odd_item_up_rate  {}".format(odd_item_up_rate.encode('utf-8')))
-                print ("odd_item_down_rate  {}".format(odd_item_down_rate.encode('utf-8')))
-     
+      
     def get_game_odd_by_oddchange(self, odd_type, game_id, company_id):
         game_odd_url = self.game_odd_base_url.format(odd_type, game_id, company_id)
         page_content = urllib2.urlopen(game_odd_url)
@@ -51,16 +46,19 @@ class Game(object):
             print ("gameid {} has {}".format(game_id, len(change_odd_item_list)))
             if len(change_odd_item_list) < 0:
                 return
-            for odd_item in change_odd_item_list:
+            for odd_item in reversed(change_odd_item_list):
                 if len(odd_item.find_all("td")) < 7:
                     odd_item_game_time = odd_item.find_all("td")[0].text  # game time
                     odd_item_current_score = odd_item.find_all("td")[1].text  # score
                     odd_item_up_rate = odd_item.find_all("td")[2].text  # shangpan shuiwei
+                    if odd_item_up_rate == "0.94":
+                        print ("gameid {} is {}".format(game_id , odd_item_up_rate))
                     odd_item_type = odd_item.find_all("td")[2].text  # odd type
                     odd_item_down_rate = odd_item.find_all("td")[2].text  # xiapanshuiwei
+                    
                     odd_item_time = odd_item.find_all("td")[3].text  # time
                     odd_item_state = odd_item.find_all("td")[4].text
-                    print odd_item_game_time, odd_item_current_score, odd_item_up_rate, odd_item_type, odd_item_down_rate, odd_item_time, odd_item_state
+#                    print odd_item_game_time, odd_item_current_score, odd_item_up_rate, odd_item_type, odd_item_down_rate, odd_item_time, odd_item_state
                 else:
                     odd_item_game_time = odd_item.find_all("td")[0].text #game time
                     odd_item_current_score = odd_item.find_all("td")[1].text #score
@@ -69,7 +67,7 @@ class Game(object):
                     odd_item_down_rate = odd_item.find_all("td")[4].text #xiapanshuiwei
                     odd_item_time = odd_item.find_all("td")[5].text #time
                     odd_item_state = odd_item.find_all("td")[6].text
-                    print odd_item_game_time, odd_item_current_score, odd_item_up_rate, odd_item_type, odd_item_down_rate, odd_item_time, odd_item_state
+#                    print odd_item_game_time, odd_item_current_score, odd_item_up_rate, odd_item_type, odd_item_down_rate, odd_item_time, odd_item_state
         return
 
     def get_yesterday_game_odd(self):
